@@ -1,6 +1,7 @@
 import React from 'react'
 import TodoListItem from './TodoListItem/TodoListItem'
 import { Card, Empty } from 'antd'
+import './TodoListItems.css'
 const todoList = (props) => {
     let list  = <Empty />;
     
@@ -15,8 +16,8 @@ const todoList = (props) => {
     } 
     return (
         <div>
-            <Card style={{ backgroundColor: 'transparent', border: 0}}>
-                <ul style={{ paddingLeft: '0px', listStyleType: 'none'}}>
+            <Card className="todo-list__card">
+                <ul>
                     {list} 
                 </ul>
             </Card>

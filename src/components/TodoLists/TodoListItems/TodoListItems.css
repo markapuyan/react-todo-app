@@ -1,0 +1,9 @@
+.todo-list__card {
+    background-color: transparent !important;
+    border: 0 !important;
+}
+
+.todo-list__card ul {
+    padding-left: 0px;
+    list-style-type: none;
+}

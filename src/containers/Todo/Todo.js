@@ -6,6 +6,7 @@ import { Row, Col, Card, Typography, Button, Tooltip } from 'antd'
 import { ArrowLeftOutlined   } from '@ant-design/icons';
 import * as todoListActions from '../../store/actions/index'
 
+import './Todo.css'
 const { Title } = Typography;
 const { Meta } = Card;
 class Todo extends Component {
@@ -30,10 +31,10 @@ class Todo extends Component {
                     updateList={this.updateTodoListHandler}/> 
             todo = this.props.todo.map(item => (
             <Card
-                style={{ width: '100%', backgroundColor: '#ffff88' }}
+                className="todo-main"
                 key={item.id}>
                 <Row>
-                    <Col xs={12} style={{textAlign: 'left'}}>
+                    <Col xs={12}>
                         <Button  
                             shape="circle" 
                             icon={<ArrowLeftOutlined/>} 
@@ -43,8 +44,8 @@ class Todo extends Component {
                     <Col xs={4}>
                         
                     </Col>
-                    <Col xs={24} style={{textAlign: 'left'}}>
-                        <Title style={{ textAlign: 'left' }}>{item.title}</Title>
+                    <Col xs={24}>
+                        <Title>{item.title}</Title>
                     </Col>
                 </Row>
                 <Row gutter={[16, 16]}>
@@ -60,7 +61,7 @@ class Todo extends Component {
                         click={this.addItemHandler}
                     />
                 </Row>
-                <Meta title={'Created At ' + item.createdAt} style={{textAlign: 'left'}} />
+                <Meta title={'Created At ' + item.createdAt} />
             </Card>))}
         return (
             <div>
