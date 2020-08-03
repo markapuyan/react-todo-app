@@ -16,7 +16,7 @@ class Todo extends Component {
     }
 
     addItemHandler = () => {
-        this.props.onAddTodoListItem(this.props.match.params.id)
+        this.props.onAddTodoListItem()
     }
 
     render() {
@@ -78,7 +78,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onInitTodoListItem: (id) => dispatch(todoListActions.initTodoListItem(id)),
-        onAddTodoListItem: (id) => dispatch(todoListActions.addTodoListItem(id)),
+        onAddTodoListItem: () => dispatch(todoListActions.addTodoListItem()),
         onInitAddItem: (event) => dispatch(todoListActions.addItemInit(event)),
         onTodoListItemChange: (event, id) => dispatch(todoListActions.todoListItemChange(event, id)),
         onTodoListItemAction: (id, type) => dispatch(todoListActions.todoListItemAction(id, type)),

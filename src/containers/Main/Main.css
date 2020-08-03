@@ -16,3 +16,7 @@
     margin-top:15px;
     font-size: 30px;
 }
+
+.todo-main__empty {
+	padding: 10% !important;
+}

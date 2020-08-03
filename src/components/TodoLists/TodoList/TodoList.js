@@ -1,6 +1,8 @@
 import React from 'react';
-import { Row, Col, Card, Typography, Button } from 'antd'
 import PopConfirm from '../../UI/PopConfirm/PopConfirm'
+import TodoProgress from '../TodoList/Progress/Progress'
+import { Row, Col, Card, Typography, Button } from 'antd'
+
 import { DeleteOutlined   } from '@ant-design/icons';
 import './TodoList.css'
 const { Title } = Typography;
@@ -16,6 +18,7 @@ const todoList = (props) => {
                             style={{ textAlign: 'left '}} level={3}
                             onClick={() =>props.selected(props.dataItem.id)}>
                             <a className="todo-list__title">{props.dataItem.title}</a></Title>
+                        <TodoProgress />
                     </Col>
                     <Col xs={4}>
                         <PopConfirm
