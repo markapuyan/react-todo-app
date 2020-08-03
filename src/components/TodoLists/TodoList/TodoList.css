@@ -1,0 +1,17 @@
+.todo-list__body {
+    min-height: 150px;
+    background-color: #ffff88;
+}
+
+
+.todo-list__title {
+    color: #444 !important;
+}
+.todo-list__delete {
+    display: none;
+}
+
+.todo-list__body:hover .todo-list__delete {
+    display: inline;
+}
+

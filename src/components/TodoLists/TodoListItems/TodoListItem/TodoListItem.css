@@ -1,0 +1,31 @@
+
+.todo-list--item_actions {
+    display: none;
+}
+.todo-list--item {
+    text-align: left;
+    padding: '12px 0'
+}
+
+.todo-list--item:hover .todo-list--item_actions {
+    display: inline;
+}
+
+.todo-list--item__link {
+    margin-left: 12px;
+}
+
+.todo-list--item__input.ant-input-affix-wrapper {
+    padding-left: 30px;
+}
+.todo-list--item__input.ant-input-affix-wrapper input {
+    font-weight: 600;
+    line-height: 1.4;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.todo-list--item__label {
+    display: inline;
+    margin-left: 16px;
+}

@@ -25,6 +25,30 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+      <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+
+      <!-- TODO: Add SDKs for Firebase products that you want to use
+          https://firebase.google.com/docs/web/setup#available-libraries -->
+      <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+
+      <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "AIzaSyBhXas57eoBnm1tNd7lF9qdLwZAYxWLAu4",
+          authDomain: "react-todo-app-da35f.firebaseapp.com",
+          databaseURL: "https://react-todo-app-da35f.firebaseio.com",
+          projectId: "react-todo-app-da35f",
+          storageBucket: "react-todo-app-da35f.appspot.com",
+          messagingSenderId: "987751015094",
+          appId: "1:987751015094:web:74ae601c3f642d2fbe7c17",
+          measurementId: "G-2QQ8XJC22D"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+      </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
