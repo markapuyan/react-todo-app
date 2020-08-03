@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row } from 'antd';
+import { Row, Col, Empty } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import Auxilliary from '../../hoc/Auxilliary/Auxilliary'
 import TodoLists from '../../components/TodoLists/TodoLists'
@@ -20,6 +20,21 @@ class Main extends Component {
     }
 
     render() {
+        let todoList = <Spinner/>;
+
+        todoList = (Array.isArray(this.props.todoList) && this.props.todoList.length)  ?
+            <TodoLists 
+                list={this.props.todoList} 
+                selected={this.selectedTodoHandler}
+                value={this.props.addItemTitle}
+                change={this.props.onInitAdd}
+                click={this.props.onAddTodo}
+                addItem={this.props.addable}
+                confirm={this.props.onRemoveTodo}/> : 
+                    <Col xs={24} className="todo-main__empty">
+                         <Empty/>
+                    </Col>;
+
         return (
             <Auxilliary>
                 <Row gutter={[16, 16]}>
@@ -34,16 +49,7 @@ class Main extends Component {
                         canAdd={this.props.addable}
                         cancel={this.props.onShowModal}
                         addTodo={this.props.onAddTodo}/>
-                    {this.props.todoList ? 
-                        <TodoLists 
-                            list={this.props.todoList} 
-                            selected={this.selectedTodoHandler}
-                            value={this.props.addItemTitle}
-                            change={this.props.onInitAdd}
-                            click={this.props.onAddTodo}
-                            addItem={this.props.addable}
-                            confirm={this.props.onRemoveTodo}/> : 
-                    <Spinner/> }
+                    { todoList }
                 </Row>
             </Auxilliary>
         )

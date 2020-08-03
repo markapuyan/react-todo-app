@@ -2,6 +2,7 @@ import * as actionTypes from '../actions/actionTypes'
 import history from '../history'
 import axios from 'axios'
 import firebaseDb from '../../firebase';
+import { PresetStatusColorTypes } from 'antd/lib/_util/colors';
 
 export const setTodoListItem = (todo) => {
     return {
@@ -37,9 +38,10 @@ export const initTodoListItem = (id) => {
     }
 }
 
-export const updateDbTodoListItem = (todoList, id) => {
+export const updateDbTodoListItem = (todoList) => {
+    const todoId = history.location.pathname.replace(/^.*[\\\/]/, '');
     return dispatch => {
-        firebaseDb.ref('todoList/'+id)
+        firebaseDb.ref('todoList/'+ todoId)
         .set(todoList[0])
         .then(() => {
             dispatch(setTodoListItem(todoList))
@@ -48,7 +50,7 @@ export const updateDbTodoListItem = (todoList, id) => {
     }
 }
 
-export const addTodoListItem = (id) => {
+export const addTodoListItem = () => {
     return (dispatch, getState) => {
         const todoList = getState().todoListItem.todo.slice();
         const newTodoItem = {
@@ -63,7 +65,7 @@ export const addTodoListItem = (id) => {
             : item.list = item.list = [newTodoItem];
         })
 
-        dispatch(updateDbTodoListItem(todoList, id))
+        dispatch(updateDbTodoListItem(todoList))
     }
 }
 
@@ -100,6 +102,7 @@ export const todoListItemAction = (id, type) => {
                 const listItem = [...getState().todoListItem.todo[item].list];
                 listItem.map(item => {
                     if(type == 'status') {
+                        console.log('here-->status', id, type)
                         if(item.id == id) {
                             item.status = !item.status
                         }
@@ -126,7 +129,8 @@ export const todoListItemAction = (id, type) => {
                 todoList[item].list = listItem;
             }
         }
-        dispatch(updateDbTodoListItem(todoList, id))
+
+        dispatch(updateDbTodoListItem(todoList))
     }
 }
 

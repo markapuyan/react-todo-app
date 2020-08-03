@@ -18,5 +18,4 @@ class AppLayout extends Component {
     }
 }
 
-
 export default AppLayout;
