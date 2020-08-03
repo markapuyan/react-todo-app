@@ -1,7 +1,5 @@
 import React from 'react'
-import { Col, Card, Typography, Row, Button } from 'antd'
 import TodoList from '../TodoLists/TodoList/TodoList'
-const { Title } = Typography;
 
 const todoList = (props) => {
     let todoList = '';

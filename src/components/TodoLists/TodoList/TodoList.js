@@ -27,7 +27,7 @@ const todoList = (props) => {
                             okText="Yes"
                             cancelText="No"
                             id={props.dataItem.id}>
-                            <a className="todo-list__delete"><DeleteOutlined /></a>
+                            <a className="todo-list__delete"><DeleteOutlined /> REMOVE</a>
                         </PopConfirm>
                     </Col>
                 </Row>
