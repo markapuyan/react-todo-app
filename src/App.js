@@ -6,7 +6,7 @@ import Main from './containers/Main/Main'
 import Todo from './containers/Todo/Todo'
 function App() {
   return (
-        <div className="App">
+      <div className="App">
         <AppLayout>
             <Switch>
               <Route exact path="/" component={Main} />

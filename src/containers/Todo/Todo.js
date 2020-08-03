@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import { Row, Col, Card, Typography, Button, Tooltip } from 'antd'
 import { ArrowLeftOutlined   } from '@ant-design/icons';
 import * as todoListActions from '../../store/actions/index'
-
 import './Todo.css'
+
 const { Title } = Typography;
 const { Meta } = Card;
 class Todo extends Component {
@@ -30,39 +30,35 @@ class Todo extends Component {
                     changed={this.props.onTodoListItemChange}
                     updateList={this.updateTodoListHandler}/> 
             todo = this.props.todo.map(item => (
-            <Card
-                className="todo-main"
-                key={item.id}>
-                <Row>
-                    <Col xs={12}>
-                        <Button  
-                            shape="circle" 
-                            icon={<ArrowLeftOutlined/>} 
-                            onClick={this.props.onBack} 
-                            size='middle' />
-                    </Col>
-                    <Col xs={4}>
-                        
-                    </Col>
-                    <Col xs={24}>
-                        <Title>{item.title}</Title>
-                    </Col>
-                </Row>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24}>
-                        {items}
-                    </Col>
-                    <AddTodoItem 
-                        value = {this.props.itemTitle}
-                        name='title'
-                        placeholder="Add Item"
-                        change={this.props.onInitAddItem}
-                        disabled={!this.props.isItemAddable}
-                        click={this.addItemHandler}
-                    />
-                </Row>
-                <Meta title={'Created At ' + item.createdAt} />
-            </Card>))}
+                <Card
+                    className="todo-main"
+                    key={item.id}>
+                    <Row>
+                        <Col xs={12}>
+                            <Button  
+                                shape="circle" 
+                                icon={<ArrowLeftOutlined/>} 
+                                onClick={this.props.onBack} 
+                                size='middle' />
+                        </Col>
+                        <Col xs={24}>
+                            <Title>{item.title}</Title>
+                        </Col>
+                    </Row>
+                    <Row gutter={[16, 16]}>
+                        <Col xs={24}>
+                            {items}
+                        </Col>
+                        <AddTodoItem 
+                            value = {this.props.itemTitle}
+                            name='title'
+                            placeholder="Add Item"
+                            change={this.props.onInitAddItem}
+                            disabled={!this.props.isItemAddable}
+                            click={this.addItemHandler}/>
+                    </Row>
+                    <Meta title={'Created At ' + item.createdAt} />
+                </Card>))}
         return (
             <div>
                 { todo }
@@ -70,7 +66,6 @@ class Todo extends Component {
         )
     }
 }
-
 
 const mapStateToProps = (state) => {
     return {

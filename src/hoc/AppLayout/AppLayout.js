@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { Layout } from 'antd';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar'
 import './AppLayout.css'
@@ -13,7 +12,7 @@ class AppLayout extends Component {
                     <Content className="todo--main__content">
                         {this.props.children}
                     </Content>
-                <Footer></Footer>
+                <Footer/>
             </Layout>
         )
     }
