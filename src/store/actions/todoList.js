@@ -37,7 +37,6 @@ export const initTodoList = (type=null) => {
                     }
                  });
             }
-
         })
         .catch(error => {
             dispatch(fetchTodoListFailed())
@@ -90,8 +89,6 @@ export const addTodoList = () => {
 }
 
 export const removeTodoList = (id) => {
-
-    console.log('asdad', id)
     return (dispatch) => {
         firebaseDb.ref('todoList/'+id)
         .remove()
@@ -99,6 +96,5 @@ export const removeTodoList = (id) => {
             dispatch(initTodoList())
         }).catch((e) => {
         })
-
     }
 }

@@ -8,7 +8,6 @@ const initialState = {
     isModalActive: false
 }
 
-
 const setTodoList = (state, action) => {
     return {
         ...state,
@@ -18,7 +17,6 @@ const setTodoList = (state, action) => {
 
 const selectedTodoList = (state, action) => {
     const selectedItemList = state.todoList.filter(item => item.id === action.id)
-
     return {
         ...state,
         selectedTodo: selectedItemList
@@ -28,14 +26,12 @@ const selectedTodoList = (state, action) => {
 const setAdd = (state, action) => {
     const title = action.title;
     let isAddable = title.trim() != '';
-
     return {
         ...state,
         addItemTitle: title,
         addable: isAddable
     }
 }
-
 
 const resetTodoList = (state, action) => {
     return {
@@ -46,7 +42,6 @@ const resetTodoList = (state, action) => {
 }
 
 const setModal = (state, action) => {
-
     return {
         ...state,
         isModalActive: !state.isModalActive,
@@ -54,9 +49,9 @@ const setModal = (state, action) => {
         addable: state.addItemTitle.trim() != ''
     }
 }
+
 const reducer = (state = initialState, action ) => {
     switch(action.type) {
-
         case actionTypes.SET_TODOLIST: return setTodoList(state, action);
         case actionTypes.SELECT_TODOLIST: return selectedTodoList(state, action);
         case actionTypes.INIT_ADD: return setAdd(state, action);
@@ -65,6 +60,5 @@ const reducer = (state = initialState, action ) => {
         default: return state;
     }
 }
-
 
 export default reducer;

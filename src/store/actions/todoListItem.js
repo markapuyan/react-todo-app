@@ -37,7 +37,6 @@ export const initTodoListItem = (id) => {
     }
 }
 
-
 export const updateDbTodoListItem = (todoList, id) => {
     return dispatch => {
         firebaseDb.ref('todoList/'+id)
@@ -65,13 +64,6 @@ export const addTodoListItem = (id) => {
         })
 
         dispatch(updateDbTodoListItem(todoList, id))
-        // this.updateListItemHander(todoList, id);
-        // this.setState({
-        //     ...this.state,
-        //     todo: todoList,
-        //     itemTitle: '',
-        //     isItemAddable: false
-        // })
     }
 }
 
@@ -82,7 +74,6 @@ export const addItemInit = (event) => {
         label: item
     }
 }
-
 
 export const todoListItemChange = (event, id) => {
     return (dispatch, getState) => {
@@ -97,7 +88,6 @@ export const todoListItemChange = (event, id) => {
             })
             todoList[item].list = listItem;
         }
-
         dispatch(setTodoListItem(todoList))
     }
 }
@@ -136,7 +126,6 @@ export const todoListItemAction = (id, type) => {
                 todoList[item].list = listItem;
             }
         }
-
         dispatch(updateDbTodoListItem(todoList, id))
     }
 }

@@ -4,12 +4,11 @@ import { Row, Col, Select } from 'antd'
 const { Option } = Select
 
 const priority = (props) => {
-    return (
-        <div style={{width: '150px'}}>
+    return (<div style={{width: '150px'}}>
         <Select 
             bordered={false}
             style={{ width: '100%' }}>
-            {props.priorityList.map(item => (
+            { props.priorityList.map(item => (
                 <Option key={item}>
                     <Row>
                         <Col>
@@ -24,12 +23,9 @@ const priority = (props) => {
                             {item[1]}
                         </Col>
                     </Row>
-                </Option>
-            ))}
+                </Option>))}
         </Select>
-        </div>
-
-    )
+        </div>)
 }
 
 export default priority

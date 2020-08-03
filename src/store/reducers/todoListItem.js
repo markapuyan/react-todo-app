@@ -1,13 +1,10 @@
 import * as actionTypes from '../actions/actionTypes'
 
-
 const initialState = {
     todo: null,
     itemTitle: '',
     isItemAddable: false
 }
-
-
 
 const setTodoListItem = (state, action) => {
     return {
@@ -29,9 +26,7 @@ const setItemAdd = (state, action) => {
     }
 }
 
-
 const reducer = (state = initialState, action) => {
-
     switch (action.type) {
         case actionTypes.SET_TODOLIST_ITEM: return setTodoListItem(state, action);
         case actionTypes.INIT_ADD_ITEM: return setItemAdd(state, action);

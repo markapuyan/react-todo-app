@@ -19,15 +19,6 @@ class Main extends Component {
         this.props.history.push('/todo/' + id);
     }
 
-
-    // addTodoHandler = () => {
-    //     this.setState((prevState) => {
-    //         return {
-    //             isModalActive : !prevState.isModalActive
-    //         }
-    //     })
-    // }
-
     render() {
         return (
             <Auxilliary>
