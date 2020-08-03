@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Layout } from 'antd'
+import './Toolbar.css'
 const { Header } = Layout;
 class Toolbar extends Component {
 
@@ -14,7 +15,11 @@ class Toolbar extends Component {
 
     render() {
         return(
-            <Header style={{ position: 'fixed', zIndex: 1, width: '100%', backgroundColor: '#F7D980'}}/>
+            <Header className="todo-header">
+                <div className="logo">
+                    Todo App
+                </div>
+            </Header>
         )
     }
 }

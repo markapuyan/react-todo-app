@@ -1,0 +1,13 @@
+.todo-header{
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    background-color: #F7D980 !important;
+}
+
+.logo {
+    float: left;
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(242, 148, 56);
+}
