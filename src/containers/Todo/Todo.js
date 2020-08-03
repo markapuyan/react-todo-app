@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import TodoListItems from '../../components/TodoLists/TodoListItems/TodoListItems'
-import AddTodoItem from '../../components/AddTodo/AddTodoItem/AddTodoItem'
 import { connect } from 'react-redux'
-import { Row, Col, Card, Typography, Button, Tooltip } from 'antd'
+import { Row, Col, Card, Typography, Button } from 'antd'
 import { ArrowLeftOutlined   } from '@ant-design/icons';
 import * as todoListActions from '../../store/actions/index'
+import TodoListItems from '../../components/TodoLists/TodoListItems/TodoListItems'
+import AddTodoItem from '../../components/AddTodo/AddTodoItem/AddTodoItem'
+import Auxilliary from '../../hoc/Auxilliary/Auxilliary'
 import './Todo.css'
 
 const { Title } = Typography;
@@ -14,11 +15,7 @@ class Todo extends Component {
     componentDidMount() {
         this.props.onInitTodoListItem(this.props.match.params.id);
     }
-
-    addItemHandler = () => {
-        this.props.onAddTodoListItem()
-    }
-
+    
     render() {
         let todo = '';
         let items = '';
@@ -55,14 +52,12 @@ class Todo extends Component {
                             placeholder="Add Item"
                             change={this.props.onInitAddItem}
                             disabled={!this.props.isItemAddable}
-                            click={this.addItemHandler}/>
+                            click={this.props.onAddTodoListItem}/>
                     </Row>
                     <Meta title={'Created At ' + item.createdAt} />
                 </Card>))}
         return (
-            <div>
-                { todo }
-            </div>
+            <Auxilliary>{ todo }</Auxilliary>
         )
     }
 }

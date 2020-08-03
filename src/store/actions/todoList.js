@@ -2,7 +2,6 @@ import * as actionTypes from '../actions/actionTypes'
 import history from '../history'
 import axios from 'axios';
 import firebaseDb from '../../firebase';
-import { initTodoListItem } from './todoListItem';
 
 export const setTodoList = (todoList) => {
     return {
