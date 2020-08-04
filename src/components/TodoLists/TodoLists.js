@@ -2,14 +2,15 @@ import React from 'react'
 import TodoList from '../TodoLists/TodoList/TodoList'
 
 const todoList = (props) => {
+    const { list, selected, confirm } = props;
     let todoList = '';
-    if (props.list) {
-        todoList = props.list.map(listItem => (
+    if (list) {
+        todoList = list.map(listItem => (
             <TodoList
                 key={listItem.id}
                 dataItem={listItem}
-                selected={props.selected}
-                confirm={props.confirm}
+                selected={selected}
+                confirm={confirm}
                 progress={listItem.list || []}/>
         ))
     }

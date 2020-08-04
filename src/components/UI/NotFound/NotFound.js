@@ -4,7 +4,7 @@ import { BugOutlined  } from '@ant-design/icons';
 import './NotFound.css'
 const { Title } = Typography
 
-const notFound = (props) => {
+const notFound = () => {
     return (
         <Row>
             <Col xs={24} className="not-found">

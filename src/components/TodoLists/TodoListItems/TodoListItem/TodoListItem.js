@@ -7,38 +7,39 @@ import './TodoListItem.css'
 const { Title } = Typography;
 
 const todoListItem = (props) => {
+    const { dataItem, changed, itemAction } = props;
     return (
         <li className='todo-list--item'>
-            { props.dataItem.editable && props.dataItem.status ?
+            { dataItem.editable && dataItem.status ?
                 <Input className="todo-list--item__input"
-                    value={props.dataItem.label} 
-                    onChange={(event) => props.changed(event, props.dataItem.id)}
+                    value={dataItem.label} 
+                    onChange={(event) => changed(event, dataItem.id)}
                     suffix={
                         <Auxilliary>
-                            <a  onClick={() => props.itemAction(props.dataItem.id, 'removeEdit')}
-                                disabled={!(props.dataItem.label.length > 0)}>
+                            <a  onClick={() => itemAction(dataItem.id, 'removeEdit')}
+                                disabled={!(dataItem.label.length > 0)}>
                                 <CloseOutlined /></a>
                         </Auxilliary>}/>: 
                 <Auxilliary>
                     <Checkbox 
-                        checked={!props.dataItem.status} 
-                        onChange={() => props.itemAction(props.dataItem.id, 'status')}/>
+                        checked={!dataItem.status} 
+                        onChange={() => itemAction(dataItem.id, 'status')}/>
                     <Title className="todo-list--item__label"
                             style={{  
-                            textDecoration: !props.dataItem.status ? 'line-through' : 'none',
-                            color: !props.dataItem.status ? '#f29438' : '#111'}}level={4}>
-                        { props.dataItem.label }</Title>
+                            textDecoration: !dataItem.status ? 'line-through' : 'none',
+                            color: !dataItem.status ? '#f29438' : '#111'}}level={4}>
+                        { dataItem.label }</Title>
                     <div className="todo-list--item_actions">
-                        { props.dataItem.status ? 
+                        { dataItem.status ? 
                             <a  className="todo-list--item__link" 
-                                onClick={() => props.itemAction(props.dataItem.id, 'edit')}>
+                                onClick={() => itemAction(dataItem.id, 'edit')}>
                                 <EditOutlined /></a> : 
                             <PopConfirm
                                 title="Are you sure delete this task?"
-                                confirm={props.itemAction}
+                                confirm={itemAction}
                                 okText="Yes"
                                 cancelText="No"
-                                id={props.dataItem.id}>
+                                id={dataItem.id}>
                                 <a className="todo-list--item__link" href="#">
                                     <DeleteOutlined />
                                 </a>

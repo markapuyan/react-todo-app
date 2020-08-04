@@ -1,21 +1,26 @@
 import React from 'react'
 import { Col, Input, Button } from 'antd';
 import { PlusSquareOutlined } from '@ant-design/icons';
+
+
+
 const addTodoItem = (props) => {
+
+    const { value, name, placeholder, change, disabled, click } = props;
 
     return (
         <Col xs={24}>
             <Input
-                value={props.value}
-                name={props.name}
-                placeholder={props.placeholder}
-                onChange={props.change}
+                value={ value }
+                name={ name }
+                placeholder={ placeholder }
+                onChange={ change }
                 suffix={
                     <Button type="link"
-                        disabled={props.disabled}>
+                        disabled={ disabled }>
                         <PlusSquareOutlined 
                         style={{fontSize: '16px'}}
-                        onClick={props.click} />
+                        onClick={ click } />
                     </Button>}/>
         </Col>
     )

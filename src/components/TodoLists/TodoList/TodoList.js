@@ -8,10 +8,11 @@ import './TodoList.css'
 const { Title } = Typography;
 
 const todoList = (props) => {
-    const arr = props.progress.filter(item => item.status == false);
-    const listPercent = (arr.length / props.progress.length) * 100
+    const { progress, dataItem, confirm, selected } = props;
+    const arr = progress.filter(item => item.status == false);
+    const listPercent = (arr.length / progress.length) * 100
 
-    let progress = (props.progress.length) ? <TodoProgress percent= {listPercent}/> 
+    let todoProgress = (progress.length) ? <TodoProgress percent= {listPercent}/> 
         : <span className="progress__nodata"><FileExclamationOutlined /> NO DATA</span>
     return (<Col xs={24} style={{ padding: '10px'}}>
             <Card
@@ -21,17 +22,17 @@ const todoList = (props) => {
                     <Col xs={20}>
                         <Title 
                             style={{ textAlign: 'left '}} level={3}
-                            onClick={() =>props.selected(props.dataItem.id)}>
-                            <a className="todo-list__title">{props.dataItem.title}</a></Title>
-                        { progress }
+                            onClick={() => selected(dataItem.id)}>
+                            <a className="todo-list__title">{dataItem.title}</a></Title>
+                        { todoProgress }
                     </Col>
                     <Col xs={4}>
                         <PopConfirm
                             title="Are you sure delete this task?"
-                            confirm ={props.confirm}
+                            confirm ={confirm}
                             okText="Yes"
                             cancelText="No"
-                            id={props.dataItem.id}>
+                            id={dataItem.id}>
                             <a className="todo-list__delete"><DeleteOutlined /> REMOVE</a>
                         </PopConfirm>
                     </Col>
