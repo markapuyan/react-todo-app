@@ -72,7 +72,7 @@ export const addTodoListItem = () => {
         })
 
         todoList[0].updatedAt = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')
-        
+
         dispatch(updateDbTodoListItem(todoList))
     }
 }
@@ -110,10 +110,10 @@ export const todoListItemAction = (id, type) => {
                 const listItem = [...getState().todoListItem.todo[item].list];
                 listItem.map(item => {
                     if(type == 'status') {
-                        console.log('here-->status', id, type)
                         if(item.id == id) {
                             item.status = !item.status
                         }
+                        todoList[0].updatedAt = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')
                     } else if(type == 'edit') {
                         if(item.id == id) {
                             item.editable = !item.editable
@@ -124,12 +124,12 @@ export const todoListItemAction = (id, type) => {
                         if(item.id == id) {
                             item.editable = false
                         }
+                        todoList[0].updatedAt = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')
                     }
                 })
                 todoList[item].list = listItem;
             }
         }
-        todoList[0].updatedAt = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')
 
         if(type == 'delete') {
             for (let item in todoList) {
@@ -137,6 +137,7 @@ export const todoListItemAction = (id, type) => {
                 listItem = listItem.filter(item => item.id != id);
                 todoList[item].list = listItem;
             }
+            todoList[0].updatedAt = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')
         }
 
         dispatch(updateDbTodoListItem(todoList))
