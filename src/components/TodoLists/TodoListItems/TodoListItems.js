@@ -3,15 +3,15 @@ import TodoListItem from './TodoListItem/TodoListItem'
 import { Card, Empty } from 'antd'
 import './TodoListItems.css'
 const todoList = (props) => {
+    const { dataItem, itemAction, changed } = props;
     let list  = <Empty />;
-    if (props.dataItem) {
-        console.log('here', props.dataItem)
-        list = props.dataItem.map(item => (
+    if (dataItem) {
+        list = dataItem.map(item => (
             <TodoListItem 
                 dataItem={item}
-                itemAction = {props.itemAction} 
+                itemAction = {itemAction} 
                 key={item.id}
-                changed={props.changed} />))
+                changed={changed} />))
     } 
     return (
         <div>
