@@ -1,10 +1,13 @@
 import React from 'react'
 import { Progress } from 'antd';
-const todoProgress = (props) => {
+import './Progress.css';
 
+const todoProgress = (props) => {
+    let indicator = (props.percent == 100) ? 'DONE' : 'IN-PROGRESS'
     return (
         <div style={{ width: '200px'}}>
-            <Progress  percent={30} size="small" />
+            <Progress  percent={props.percent} size="small" />
+            <span className="progress-indicator"> {indicator } </span>
         </div>
     )
 }

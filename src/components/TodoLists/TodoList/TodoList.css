@@ -15,3 +15,7 @@
     display: inline;
 }
 
+.progress__nodata {
+    float: left;
+    font-size: 10px;
+}

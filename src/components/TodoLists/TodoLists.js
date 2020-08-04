@@ -9,7 +9,8 @@ const todoList = (props) => {
                 key={listItem.id}
                 dataItem={listItem}
                 selected={props.selected}
-                confirm={props.confirm}/>
+                confirm={props.confirm}
+                progress={listItem.list || []}/>
         ))
     }
     return todoList
