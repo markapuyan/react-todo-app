@@ -1,0 +1,10 @@
+.not-found {
+    padding: 10%;
+}
+.not-found > span.anticon {
+    font-size: 4rem ;
+}
+.ant-typography.not-found__title {
+    color: #444;
+    margin-top: 10px;
+}

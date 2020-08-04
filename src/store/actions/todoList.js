@@ -16,8 +16,15 @@ export const fetchTodoListFailed = () => {
     }
 }
 
+export const fetchTodoListStart = () => {
+    return {
+        type: actionTypes.FETCH_TODOLIST_START
+    }
+}
+
 export const initTodoList = (type=null) => {
     return (dispatch, getState) => {
+        dispatch(fetchTodoListStart())
         axios.get('https://react-todo-app-da35f.firebaseio.com/todoList.json')
         .then(response => {
             const todoList = []

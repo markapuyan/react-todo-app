@@ -23,9 +23,9 @@ const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
 const app = (
     <Provider store={store}>
-    <Router history={history}>
-        <App />
-    </Router>
+        <Router history={history}>
+            <App />
+        </Router>
     </Provider>
 );
 
