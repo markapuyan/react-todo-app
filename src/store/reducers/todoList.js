@@ -5,16 +5,31 @@ const initialState = {
     selectedTodo: '',
     addItemTitle: '',
     addable: false,
-    isModalActive: false
+    isModalActive: false,
+    fetchLoading: false
 }
 
+
+const fetchTodoList = (state, action) => {
+    return {
+        ...state,
+        fetchLoading: true
+    }
+}
 const setTodoList = (state, action) => {
     return {
         ...state,
-        todoList: action.todoList
+        todoList: action.todoList,
+        fetchLoading: false
     }
 }
 
+const fetchTodoListFailed = (state, action) => {
+    return {
+        ...state,
+        fetchLoading: false
+    }
+}
 const selectedTodoList = (state, action) => {
     const selectedItemList = state.todoList.filter(item => item.id === action.id)
     return {
@@ -52,7 +67,9 @@ const setModal = (state, action) => {
 
 const reducer = (state = initialState, action ) => {
     switch(action.type) {
+        case actionTypes.FETCH_TODOLIST_START: return fetchTodoList(state, action);
         case actionTypes.SET_TODOLIST: return setTodoList(state, action);
+        case actionTypes.FETCH_TODOLIST_FAIL: return fetchTodoListFailed(state, action);
         case actionTypes.SELECT_TODOLIST: return selectedTodoList(state, action);
         case actionTypes.INIT_ADD: return setAdd(state, action);
         case actionTypes.RESET_TODOLIST: return resetTodoList(state, action);

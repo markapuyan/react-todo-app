@@ -9,5 +9,9 @@
     float: left;
     font-size: 20px;
     font-weight: 600;
+    
+}
+
+.logo a {
     color: rgb(242, 148, 56);
 }

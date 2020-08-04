@@ -14,7 +14,7 @@ const addTodo = (props) => {
                 Add
               </Button>
             ]}>
-          <Title size={2}>Enter Title</Title>
+          <Title level={3}>Enter Title</Title>
           <Input 
               size="large" 
               placeholder="Title"

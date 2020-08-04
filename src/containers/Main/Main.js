@@ -20,25 +20,24 @@ class Main extends Component {
     }
 
     render() {
-        let todoList = <Spinner/>;
-
-        todoList = (Array.isArray(this.props.todoList) && this.props.todoList.length)  ?
-            <TodoLists 
-                list={this.props.todoList} 
-                selected={this.selectedTodoHandler}
-                value={this.props.addItemTitle}
-                change={this.props.onInitAdd}
-                click={this.props.onAddTodo}
-                addItem={this.props.addable}
-                confirm={this.props.onRemoveTodo}/> : 
-                    <Col xs={24} className="todo-main__empty">
-                         <Empty/>
-                    </Col>;
-
+        let todoList = '';
+        todoList = (this.props.fetchLoading) ? <Spinner/> :
+                    (Array.isArray(this.props.todoList) && this.props.todoList.length)  ?
+                    <TodoLists 
+                        list={this.props.todoList} 
+                        selected={this.selectedTodoHandler}
+                        value={this.props.addItemTitle}
+                        change={this.props.onInitAdd}
+                        click={this.props.onAddTodo}
+                        addItem={this.props.addable}
+                        confirm={this.props.onRemoveTodo}/> : 
+                            <Col xs={24} className="todo-main__empty">
+                                <Empty/>
+                            </Col>;
         return (
             <Auxilliary>
                 <Row gutter={[16, 16]}>
-                    <a  onClick={this.props.onShowModal}
+                    <a  href="#" onClick={this.props.onShowModal}
                         className='float'>
                             <PlusOutlined className="my-float" />
                     </a>
@@ -61,7 +60,8 @@ const mapStateToProps = state => {
         todoList: state.todoList.todoList,
         addItemTitle: state.todoList.addItemTitle,
         addable: state.todoList.addable,
-        isModalActive: state.todoList.isModalActive
+        isModalActive: state.todoList.isModalActive,
+        fetchLoading: state.todoList.fetchLoading
     }
 }
 
