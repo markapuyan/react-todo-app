@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes'
 import history from '../history'
 import axios from 'axios';
 import firebaseDb from '../../firebase';
-
+import moment from 'moment'
 export const setTodoList = (todoList) => {
     return {
         type: actionTypes.SET_TODOLIST,
@@ -82,7 +82,7 @@ export const addTodoList = () => {
         const newItem = {
             title: getState().todoList.addItemTitle,
             status: 1,
-            createdAt: new Date().toLocaleDateString("en-US"),
+            createdAt: moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')
         }
         axios.post('https://react-todo-app-da35f.firebaseio.com/todoList.json', newItem)
         .then(response => {

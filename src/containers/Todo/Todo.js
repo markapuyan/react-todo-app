@@ -6,6 +6,7 @@ import * as todoListActions from '../../store/actions/index'
 import TodoListItems from '../../components/TodoLists/TodoListItems/TodoListItems'
 import AddTodoItem from '../../components/AddTodo/AddTodoItem/AddTodoItem'
 import Auxilliary from '../../hoc/Auxilliary/Auxilliary'
+import Spinner from '../../components/UI/Spinner/Spinner'
 import './Todo.css'
 
 const { Title } = Typography;
@@ -15,11 +16,11 @@ class Todo extends Component {
     componentDidMount() {
         this.props.onInitTodoListItem(this.props.match.params.id);
     }
-    
+
     render() {
-        let todo = '';
+        let todo = (this.props.fetchLoading) ? <Spinner/> : null;
         let items = '';
-        if(this.props.todo) {
+        if (this.props.todo) {
             items = 
                 <TodoListItems 
                     dataItem={this.props.todo[0].list || null} 
@@ -54,7 +55,8 @@ class Todo extends Component {
                             disabled={!this.props.isItemAddable}
                             click={this.props.onAddTodoListItem}/>
                     </Row>
-                    <Meta title={'Created At ' + item.createdAt} />
+                    <Meta title={ item.updatedAt ? 'Last Updated: '+  item.updatedAt
+                            : 'Created At: '+ item.createdAt } />
                 </Card>))}
         return (
             <Auxilliary>{ todo }</Auxilliary>
@@ -66,7 +68,8 @@ const mapStateToProps = (state) => {
     return {
         todo: state.todoListItem.todo,
         isItemAddable : state.todoListItem.isItemAddable,
-        itemTitle: state.todoListItem.itemTitle
+        itemTitle: state.todoListItem.itemTitle,
+        fetchLoading: state.todoListItem.fetchLoading
     }
 }
 
