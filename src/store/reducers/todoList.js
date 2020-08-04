@@ -6,7 +6,8 @@ const initialState = {
     addItemTitle: '',
     addable: false,
     isModalActive: false,
-    fetchLoading: false
+    fetchLoading: false,
+    fetchError: false
 }
 
 
@@ -27,7 +28,8 @@ const setTodoList = (state, action) => {
 const fetchTodoListFailed = (state, action) => {
     return {
         ...state,
-        fetchLoading: false
+        fetchLoading: false,
+        fethError: true
     }
 }
 const selectedTodoList = (state, action) => {

@@ -2,7 +2,13 @@ import * as actionTypes from '../actions/actionTypes'
 import history from '../history'
 import axios from 'axios'
 import firebaseDb from '../../firebase';
+import moment from 'moment'
 
+export const fetchTodoListItemStart = () => {
+    return {
+        type: actionTypes.FETCH_TODOLIST_ITEM_START
+    }
+}
 export const setTodoListItem = (todo) => {
     return {
         type: actionTypes.SET_TODOLIST_ITEM,
@@ -18,6 +24,7 @@ export const fetchTodoListItemFail = () => {
 
 export const initTodoListItem = (id) => {
     return dispatch => {
+        dispatch(fetchTodoListItemStart())
         axios.get('https://react-todo-app-da35f.firebaseio.com/todoList.json')
         .then(response => {
             const todo = []
@@ -64,6 +71,8 @@ export const addTodoListItem = () => {
             : item.list = item.list = [newTodoItem];
         })
 
+        todoList[0].updatedAt = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')
+        
         dispatch(updateDbTodoListItem(todoList))
     }
 }
@@ -120,6 +129,7 @@ export const todoListItemAction = (id, type) => {
                 todoList[item].list = listItem;
             }
         }
+        todoList[0].updatedAt = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')
 
         if(type == 'delete') {
             for (let item in todoList) {
