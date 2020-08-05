@@ -1,7 +1,6 @@
 import * as actionTypes from '../actions/actionTypes'
 import history from '../history'
 import axios from 'axios'
-import firebaseDb from '../../firebase';
 import moment from 'moment'
 
 export const fetchTodoListItemStart = () => {
@@ -25,16 +24,15 @@ export const fetchTodoListItemFail = () => {
 export const initTodoListItem = (id) => {
     return dispatch => {
         dispatch(fetchTodoListItemStart())
-        axios.get('https://react-todo-app-da35f.firebaseio.com/todoList.json')
+        const queryParams = '?orderBy="$key"&equalTo="'+ id +'"';
+        axios.get('https://react-todo-app-da35f.firebaseio.com/todoList.json' + queryParams)
         .then(response => {
             const todo = []
             for (let key in response.data) {
-                if(id === key) {
-                    todo.push({
-                        ...response.data[key],
-                        id: key
-                    });
-                }
+                todo.push({
+                    ...response.data[key],
+                    id: key
+                });
             }
             dispatch(setTodoListItem(todo))
         })
@@ -47,11 +45,12 @@ export const initTodoListItem = (id) => {
 export const updateDbTodoListItem = (todoList) => {
     const todoId = history.location.pathname.replace(/^.*[\\\/]/, '');
     return dispatch => {
-        firebaseDb.ref('todoList/'+ todoId)
-        .set(todoList[0])
-        .then(() => {
+        axios.put('https://react-todo-app-da35f.firebaseio.com/todoList/'+todoId+'.json', todoList[0])
+        .then(response => {
             dispatch(setTodoListItem(todoList))
-        }).catch((e) => {
+        })
+        .catch(error => {
+            console.log('error', error)
         })
     }
 }
@@ -140,6 +139,7 @@ export const todoListItemAction = (id, type) => {
             todoList[0].updatedAt = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')
         }
 
+        console.log('-->item', todoList);
         dispatch(updateDbTodoListItem(todoList))
     }
 }

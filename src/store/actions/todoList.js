@@ -1,7 +1,6 @@
 import * as actionTypes from '../actions/actionTypes'
 import history from '../history'
 import axios from 'axios';
-import firebaseDb from '../../firebase';
 import moment from 'moment'
 export const setTodoList = (todoList) => {
     return {
@@ -96,11 +95,12 @@ export const addTodoList = () => {
 
 export const removeTodoList = (id) => {
     return (dispatch) => {
-        firebaseDb.ref('todoList/'+id)
-        .remove()
-        .then(() => {
+        axios.delete('https://react-todo-app-da35f.firebaseio.com/todoList/'+id+'.json')
+        .then(response => {
             dispatch(initTodoList())
-        }).catch((e) => {
+        })
+        .catch(error => {
+            console.log('error', error)
         })
     }
 }

@@ -20,10 +20,14 @@ class Todo extends Component {
     render() {
         let todo = (this.props.fetchLoading) ? <Spinner/> : null;
         let items = '';
-        if (this.props.todo) {
+        let list = null;
+        if (this.props.todo) {  
+            this.props.todo.map(item => {
+                list = item.hasOwnProperty('list') ? item.list : null
+            })
             items = 
                 <TodoListItems 
-                    dataItem={this.props.todo[0].list || null} 
+                    dataItem={ list }   
                     itemAction={this.props.onTodoListItemAction} 
                     changed={this.props.onTodoListItemChange}
                     updateList={this.updateTodoListHandler}/> 
