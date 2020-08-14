@@ -5,9 +5,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This project is the culmination of the Phase 1 Study of React:
 
+v1.
 1. Creation of application using React's Class-based approach
 2. Manipulate and Store data using a centralized Store, action creators and reducers (Redux, Redux-thunk)
 3. Use Routing (React-Router)
+
+v2.
+1. Introduce Redux saga in replace of redux thunk
 
 ## Available Scripts
 
