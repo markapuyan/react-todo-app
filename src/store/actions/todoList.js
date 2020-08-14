@@ -1,7 +1,6 @@
 import * as actionTypes from '../actions/actionTypes'
-import history from '../history'
-import axios from 'axios';
 import moment from 'moment'
+
 export const setTodoList = (todoList) => {
     return {
         type: actionTypes.SET_TODOLIST,
@@ -21,31 +20,10 @@ export const fetchTodoListStart = () => {
     }
 }
 
-export const initTodoList = (type=null) => {
-    return (dispatch, getState) => {
-        dispatch(fetchTodoListStart())
-        axios.get('https://react-todo-app-da35f.firebaseio.com/todoList.json')
-        .then(response => {
-            const todoList = []
-            for (let key in response.data) {
-                todoList.push({
-                    ...response.data[key],
-                    id: key
-                });
-            }
-            dispatch(setTodoList(todoList));
-
-            if(type == 'redirect') {
-                getState().todoList.todoList.forEach((item, idx, array) =>{
-                    if (idx === array.length - 1){ 
-                        history.push('/todo/' + item.id);
-                    }
-                 });
-            }
-        })
-        .catch(error => {
-            dispatch(fetchTodoListFailed())
-        })
+export const initTodoList = (redirect=null) => {
+    return {
+        type: actionTypes.INIT_TODOLIST,
+        isRedirect: redirect
     }
 }
 
@@ -76,31 +54,16 @@ export const setModal = () => {
     }
 }
 
-export const addTodoList = () => {
-    return (dispatch, getState) =>{
-        const newItem = {
-            title: getState().todoList.addItemTitle,
-            status: 1,
-            createdAt: moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')
-        }
-        axios.post('https://react-todo-app-da35f.firebaseio.com/todoList.json', newItem)
-        .then(response => {
-            dispatch(resetTodoList())
-            dispatch(initTodoList('redirect'))
-        })
-        .catch(error => {
-        })
+export const addTodoList = (addTitle) => {
+    return {
+        type: actionTypes.ADD_TODOLIST_INIT,
+        title: addTitle
     }
 }
 
 export const removeTodoList = (id) => {
-    return (dispatch) => {
-        axios.delete('https://react-todo-app-da35f.firebaseio.com/todoList/'+id+'.json')
-        .then(response => {
-            dispatch(initTodoList())
-        })
-        .catch(error => {
-            console.log('error', error)
-        })
+    return {
+        type: actionTypes.REMOVE_TODOLIST,
+        id: id
     }
 }

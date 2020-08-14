@@ -6,20 +6,27 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'antd/dist/antd.css';
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux' 
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
+import createSagaMiddleware  from 'redux-saga'
 import thunk from 'redux-thunk'
 import todoListReducer from './store/reducers/todoList'
 import todoListItemReducer from './store/reducers/todoListItem'
 import history from './store/history'
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+import { watchTodoList } from './store/sagas/index'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 const rootReducer = combineReducers({
     todoList: todoListReducer,
     todoListItem: todoListItemReducer
 })
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+const sagaMiddleware = createSagaMiddleware()
+
+const store = createStore(rootReducer, composeWithDevTools(
+    applyMiddleware(thunk, sagaMiddleware)
+));
+
+sagaMiddleware.run(watchTodoList)
 
 const app = (
     <Provider store={store}>
