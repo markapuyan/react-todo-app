@@ -17,6 +17,19 @@ class Todo extends Component {
         this.props.onInitTodoListItem(this.props.match.params.id);
     }
 
+    addTodoListItemHandler = () => {
+        this.props.onAddTodoListItem(this.props.todo, this.props.itemTitle)
+    }
+
+    inputTodoListItemHandler = (event, id) => {
+        console.log(event, id)
+        this.props.onTodoListItemChange(event, id, this.props.todo)
+    }
+
+    itemActionHandler = (id, type) =>{
+        this.props.onTodoListItemAction(id, type, this.props.todo)
+    }
+
     render() {
         let todo = (this.props.fetchLoading) ? <Spinner/> : null;
         let items = '';
@@ -28,8 +41,8 @@ class Todo extends Component {
             items = 
                 <TodoListItems 
                     dataItem={ list }   
-                    itemAction={this.props.onTodoListItemAction} 
-                    changed={this.props.onTodoListItemChange}
+                    itemAction={this.itemActionHandler} 
+                    changed={this.inputTodoListItemHandler}
                     updateList={this.updateTodoListHandler}/> 
             todo = this.props.todo.map(item => (
                 <Card
@@ -57,7 +70,7 @@ class Todo extends Component {
                             placeholder="Add Item"
                             change={this.props.onInitAddItem}
                             disabled={!this.props.isItemAddable}
-                            click={this.props.onAddTodoListItem}/>
+                            click={this.addTodoListItemHandler}/>
                     </Row>
                     <Meta title={ item.updatedAt ? 'Last Updated: '+  item.updatedAt
                             : 'Created At: '+ item.createdAt } />
@@ -80,10 +93,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onInitTodoListItem: (id) => dispatch(todoListActions.initTodoListItem(id)),
-        onAddTodoListItem: () => dispatch(todoListActions.addTodoListItem()),
+        onAddTodoListItem: (todo, title) => dispatch(todoListActions.addTodoListItem(todo, title)),
         onInitAddItem: (event) => dispatch(todoListActions.addItemInit(event)),
-        onTodoListItemChange: (event, id) => dispatch(todoListActions.todoListItemChange(event, id)),
-        onTodoListItemAction: (id, type) => dispatch(todoListActions.todoListItemAction(id, type)),
+        onTodoListItemChange: (event, id, todo) => dispatch(todoListActions.todoListItemChange(event, id, todo)),
+        onTodoListItemAction: (id, type, todo) => dispatch(todoListActions.todoListItemAction(id, type, todo)),
         onBack: ()=> dispatch(todoListActions.resetTodoListItem())
     }
 }

@@ -12,7 +12,7 @@ import thunk from 'redux-thunk'
 import todoListReducer from './store/reducers/todoList'
 import todoListItemReducer from './store/reducers/todoListItem'
 import history from './store/history'
-import { watchTodoList } from './store/sagas/index'
+import { watchTodoList, watchTodoListItem } from './store/sagas/index'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 const rootReducer = combineReducers({
@@ -27,7 +27,7 @@ const store = createStore(rootReducer, composeWithDevTools(
 ));
 
 sagaMiddleware.run(watchTodoList)
-
+sagaMiddleware.run(watchTodoListItem)
 const app = (
     <Provider store={store}>
         <Router history={history}>
