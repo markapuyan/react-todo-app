@@ -22,57 +22,24 @@ export const fetchTodoListItemFail = () => {
 }
 
 export const initTodoListItem = (id) => {
-    return dispatch => {
-        dispatch(fetchTodoListItemStart())
-        const queryParams = '?orderBy="$key"&equalTo="'+ id +'"';
-        axios.get('todoList.json' + queryParams)
-        .then(response => {
-            const todo = []
-            for (let key in response.data) {
-                todo.push({
-                    ...response.data[key],
-                    id: key
-                });
-            }
-            dispatch(setTodoListItem(todo))
-        })
-        .catch(error => {
-            dispatch(fetchTodoListItemFail())
-        })
+    return {
+        type: actionTypes.INIT_TODOLIST_ITEM,
+        id: id
     }
 }
 
 export const updateDbTodoListItem = (todoList) => {
-    const todoId = history.location.pathname.replace(/^.*[\\\/]/, '');
-    return dispatch => {
-        axios.put('todoList/'+todoId+'.json', todoList[0])
-        .then(response => {
-            dispatch(setTodoListItem(todoList))
-        })
-        .catch(error => {
-            console.log('error', error)
-        })
+    return {
+        type: actionTypes.UPDATE_TODOLIST_ITEM,
+        todoList: todoList
     }
 }
 
-export const addTodoListItem = () => {
-    return (dispatch, getState) => {
-        const todoList = getState().todoListItem.todo.slice();
-        const newTodoItem = {
-            status: true,
-            label: getState().todoListItem.itemTitle,
-            id: Math.floor(Math.random() * 100) +  Date.now(),
-            editable: false
-        }
-
-        todoList.map(item => {
-            item.hasOwnProperty('list') ? item.list = item.list.concat(newTodoItem) 
-            : item.list = item.list = [newTodoItem];
-        })
-
-        todoList[0].updatedAt = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')
-
-        dispatch(updateDbTodoListItem(todoList))
+export const addTodoListItem = (todo, itemTitle) => {
+    return {
+        type: actionTypes.ADD_TODOLIST_ITEM,
+        todo: todo,
+        itemTitle: itemTitle
     }
 }
 
@@ -84,61 +51,22 @@ export const addItemInit = (event) => {
     }
 }
 
-export const todoListItemChange = (event, id) => {
-    return (dispatch, getState) => {
-        const label = event.target.value
-        const todoList = [...getState().todoListItem.todo];
-        for (let item in todoList) {
-            const listItem = [...todoList[item].list];
-            listItem.map(item => {
-                if(item.id == id) {
-                    item.label = label
-                }
-            })
-            todoList[item].list = listItem;
-        }
-        dispatch(setTodoListItem(todoList))
+export const todoListItemChange = (event, id, todo) => {
+    const item = event.target.value
+    return {
+        type: actionTypes.INIT_TODOLIST_ITEM_CHANGE,
+        label: item,
+        id: id,
+        todo: todo
     }
 }
 
-export const todoListItemAction = (id, type) => {
-    return(dispatch, getState) => {
-        const todoList = [...getState().todoListItem.todo];
-        if(type == 'edit' || 'status' || 'removeEdit') {
-            for (let item in todoList) {
-                const listItem = [...getState().todoListItem.todo[item].list];
-                listItem.map(item => {
-                    if(type == 'status') {
-                        if(item.id == id) {
-                            item.status = !item.status
-                        }
-                        todoList[0].updatedAt = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')
-                    } else if(type == 'edit') {
-                        if(item.id == id) {
-                            item.editable = !item.editable
-                        } else {
-                            item.editable = false
-                        }
-                    } else {
-                        if(item.id == id) {
-                            item.editable = false
-                        }
-                        todoList[0].updatedAt = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')
-                    }
-                })
-                todoList[item].list = listItem;
-            }
-        }
-
-        if(type == 'delete') {
-            for (let item in todoList) {
-                let listItem = [...getState().todoListItem.todo[item].list];
-                listItem = listItem.filter(item => item.id != id);
-                todoList[item].list = listItem;
-            }
-            todoList[0].updatedAt = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')
-        }
-        dispatch(updateDbTodoListItem(todoList))
+export const todoListItemAction = (id, type, todo) => {
+    return {
+        type: actionTypes.INIT_TODOLIST_ITEM_ACTION,
+        id: id,
+        actionType: type,
+        todo: todo
     }
 }
 
