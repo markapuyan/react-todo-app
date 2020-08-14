@@ -4,16 +4,14 @@ import { Modal, Typography, Input, Button } from 'antd'
 const { Title } = Typography
 
 const addTodo = (props) => {
-  
-  const { visible, cancel, canAdd, addTodo, value, changed } = props;
 
   return (<Modal
-          visible={visible}
-          onCancel={cancel}
+          visible={props.visible}
+          onCancel={props.cancel}
           footer={[
               <Button key="submit" 
-                disabled={!canAdd}
-                onClick={addTodo}>
+                disabled={!props.canAdd}
+                onClick={props.addTodo}>
                 Add
               </Button>
             ]}>
@@ -21,8 +19,8 @@ const addTodo = (props) => {
           <Input 
               size="large" 
               placeholder="Title"
-              value={value}
-              onChange={changed}/>
+              value={props.value}
+              onChange={props.changed}/>
       </Modal>)
 }
 

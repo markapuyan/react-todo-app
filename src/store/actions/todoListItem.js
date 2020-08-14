@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes'
 import history from '../history'
-import axios from 'axios'
+import axios from '../../axios-todo'
 import moment from 'moment'
 
 export const fetchTodoListItemStart = () => {
@@ -25,7 +25,7 @@ export const initTodoListItem = (id) => {
     return dispatch => {
         dispatch(fetchTodoListItemStart())
         const queryParams = '?orderBy="$key"&equalTo="'+ id +'"';
-        axios.get('https://react-todo-app-da35f.firebaseio.com/todoList.json' + queryParams)
+        axios.get('todoList.json' + queryParams)
         .then(response => {
             const todo = []
             for (let key in response.data) {
@@ -45,7 +45,7 @@ export const initTodoListItem = (id) => {
 export const updateDbTodoListItem = (todoList) => {
     const todoId = history.location.pathname.replace(/^.*[\\\/]/, '');
     return dispatch => {
-        axios.put('https://react-todo-app-da35f.firebaseio.com/todoList/'+todoId+'.json', todoList[0])
+        axios.put('todoList/'+todoId+'.json', todoList[0])
         .then(response => {
             dispatch(setTodoListItem(todoList))
         })
@@ -138,8 +138,6 @@ export const todoListItemAction = (id, type) => {
             }
             todoList[0].updatedAt = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')
         }
-
-        console.log('-->item', todoList);
         dispatch(updateDbTodoListItem(todoList))
     }
 }

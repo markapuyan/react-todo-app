@@ -19,6 +19,11 @@ class Main extends Component {
         this.props.history.push('/todo/' + id);
     }
 
+    addTodoHandler = () => {
+        console.log("GEREERER")
+        this.props.onAddTodo(this.props.addItemTitle)
+    }
+
     render() {
         let todoList = '';
         todoList = (this.props.fetchLoading) ? <Spinner/> :
@@ -28,7 +33,7 @@ class Main extends Component {
                         selected={this.selectedTodoHandler}
                         value={this.props.addItemTitle}
                         change={this.props.onInitAdd}
-                        click={this.props.onAddTodo}
+                        click={this.addTodoHandler}
                         addItem={this.props.addable}
                         confirm={this.props.onRemoveTodo}/> : 
                             <Col xs={24} className="todo-main__empty">
@@ -47,7 +52,7 @@ class Main extends Component {
                         value={this.props.addItemTitle}
                         canAdd={this.props.addable}
                         cancel={this.props.onShowModal}
-                        addTodo={this.props.onAddTodo}/>
+                        addTodo={this.addTodoHandler}/>
                     { todoList }
                 </Row>
             </Auxilliary>
@@ -61,7 +66,8 @@ const mapStateToProps = state => {
         addItemTitle: state.todoList.addItemTitle,
         addable: state.todoList.addable,
         isModalActive: state.todoList.isModalActive,
-        fetchLoading: state.todoList.fetchLoading
+        fetchLoading: state.todoList.fetchLoading,
+        addItemTitle: state.todoList.addItemTitle
     }
 }
 
@@ -70,7 +76,7 @@ const mapDispatchToProps = dispatch => {
         onInitTodoList: () => dispatch(todoListActions.initTodoList()),
         onSelectedTodo: (id) => dispatch(todoListActions.selectTodoList(id)),
         onInitAdd: (event) => dispatch(todoListActions.addInit(event)),
-        onAddTodo: () => dispatch(todoListActions.addTodoList()),
+        onAddTodo: (title) => dispatch(todoListActions.addTodoList(title)),
         onShowModal: () => dispatch(todoListActions.setModal()),
         onRemoveTodo: (id) => dispatch(todoListActions.removeTodoList(id))
     }
